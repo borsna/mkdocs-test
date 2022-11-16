@@ -1,7 +1,6 @@
 # Test docs
 
-
----------------
+Example for docs
 
 # Welcome to MkDocs
 
