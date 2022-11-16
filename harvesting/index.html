@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Harvesting overview - SND Tech Documentation</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Harvesting overview";
+        var mkdocs_page_input_path = "harvesting/index.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> SND Tech Documentation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">SND Technical specifications</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Harvesting</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Harvesting overview</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#oai-pmh">OAI-PMH</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#sitemapxml">sitemap.xml</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">SND Tech Documentation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+          <li>Harvesting &raquo;</li>
+      <li>Harvesting overview</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="harvesting-overview">Harvesting overview</h1>
+<p>To be able to harvest dataset metadata from a repository a machien acionable way to access the metadata is needed.
+To avoid a SND-specific method SND recomends estabilised standards like DataCite XML via OAI-PMH and/or schema.org json-ld via sitemap.xml.</p>
+<h2 id="oai-pmh">OAI-PMH</h2>
+<p>The Open Archives Initiative Protocol for Metadata Harvesting (OAI-PMH) is a well estabilished specification to provide a machine accionable harvest endpoint for a respository. If DataCite is used to register DOI:s each prefix will be harvestable in thier central endpoint witch will make it harvestable by SND and other repostitories.
+This is the recomended way to provide metadata to SND:s metadata catalogue.</p>
+<h2 id="sitemapxml">sitemap.xml</h2>
+<p>Your repository should implement a sitemap.xml endpoint to provide webcrawlers to find and index the landing page for each dataset. The url to sitemap.xml should be added to <code>robots.txt</code> for example:</p>
+<pre><code class="language-txt"># robots.txt
+#
+# This file is to prevent the crawling and indexing of certain parts
+# of your site by web crawlers and spiders run by sites like Yahoo!
+# and Google. By telling these &quot;robots&quot; where not to go on your site,
+# you save bandwidth and server resources.
+#
+# For more information about the robots.txt standard, see:
+# http://www.robotstxt.org/robotstxt.html
+
+Sitemap: https://example.org/catalogue/sitemap.xml
+Crawl-delay: 10
+</code></pre>
+<p>The repository <code>sitemap.xml</code> should list all the url:s for the latest version of each dataset in the catalogue:</p>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;urlset xmlns=&quot;http://www.sitemaps.org/schemas/sitemap/0.9&quot; xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; schemaLocation=&quot;http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd&quot;&gt;
+  &lt;url&gt;
+    &lt;loc&gt;https://example.org/catalogue/dataset/ds-1&lt;/loc&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;https://example.org/catalogue/dataset/ds-2&lt;/loc&gt;
+  &lt;/url&gt;
+&lt;/urlset&gt;
+</code></pre>
+<p>More information about sitemap.xml can be found on the official webpage: <a href="https://www.sitemaps.org">https://www.sitemaps.org</a></p>
+<p>On the landing page for each dataset the resource metadata should be availible as schema.org json-ld.
+Recomendations and examples is listed HERE.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href=".." class="btn btn-neutral float-left" title="SND Technical specifications"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
