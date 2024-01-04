@@ -1,4 +1,4 @@
 site_name: SND Tech Documentation
-theme: readthedocs
+theme: material
 repo_url: https://github.com/borsna/mkdocs-test/
 edit_uri: edit/main/docs/
