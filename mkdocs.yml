@@ -2,3 +2,12 @@ site_name: SND Tech Documentation
 theme: material
 repo_url: https://github.com/borsna/mkdocs-test/
 edit_uri: edit/main/docs/
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
